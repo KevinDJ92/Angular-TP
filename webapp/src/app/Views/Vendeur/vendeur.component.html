@@ -1,0 +1,169 @@
+<body class="bloc">
+  <header>
+    <div id="header_content">
+      <div id="header_top_content">
+        <div id="header_img_logo">
+          <a href="index.html"><img src="assets/images/logo2.png" alt="Logo de la compagnie"></a>
+        </div>
+        <div class="banner">
+          <img class="banner_img" src="assets/images/banniere.PNG" alt="Banniere de la compagnie">
+          <h1 class="banner_text">Liste des vendeurs</h1>
+        </div>
+      </div>
+      <!-- END header_top_content -->
+    </div>
+    <!-- END header_content -->
+  </header>
+  
+  <div style="border:2px solid #008CBA;box-shadow:2px 2px 3px #999; width:25%; border-bottom-right-radius: 20%; padding:20px; text-align:center;border-bottom:7px solid #008CBA;">
+    <ul id="menu-accordeon">
+      <li id="lemenu"><a href="#" style="color:#555;">MENU</a>
+        <ul>
+          <li><a href="#" class="btn-aside">COMMANDE</a></li>
+          <li><a [routerLink]="['/client']" class="btn-aside">CLIENT</a></li>
+          <li><a [routerLink]="['/produit']" class="btn-aside">PRODUIT</a></li>
+          <li><a href="#" class="btn-aside">VENDEUR</a></li>
+          <li><a href="#" class="btn-aside">COMMISSION</a></li>
+          <li><a href="#" class="btn-aside">SYSTÉME</a></li>
+          <li><a href="#" class="btn-aside">DECONNECTER</a></li>
+        </ul>
+      </li>
+      <p>
+        <a class="ajouterProduit" href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
+                  AJOUTER 
+                  <!-- <img src="assets/images/ajouter.png" alt="Logo de la compagnie"> -->
+                </a>
+      </p>
+      <p>
+        <a class="ajouterProduit" href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
+                DECONNECTER
+                <!-- <img src="assets/images/ajouter.png" alt="Logo de la compagnie"> -->
+              </a>
+      </p>
+    </ul>
+  </div>
+  <!-- <h1>Angular 4 CRUD Example</h1> -->
+  <h3 *ngIf="vendeurIdToUpdate; else create">
+    Update vendeur for Id: {{vendeurIdToUpdate}}
+  </h3>
+  <ng-template #create>
+    <!-- <h3> Create New vendeur </h3> -->
+  </ng-template>
+  <div>
+    <!-- 
+        <p  style="text-align:center">
+          <a class="ajouterVendeur" href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
+            AJOUTER UN PRODUIT
+           
+          </a>
+        </p> -->
+    <div id="light" class="white_content">
+
+      <!-- This is the lightbox content. -->
+      <a class="btn-aside" href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">FERMER</a>
+
+      <h1>Renseigner les champs ci-dessous:</h1>
+      <form [formGroup]="vendeurForm" (ngSubmit)="onVendeurFormSubmit()">
+        <table>
+          <tr>
+            <td>Entrer Vendeur</td>
+            <td>
+              <input formControlName="vendeur">
+              <label *ngIf="vendeurForm.get('vendeur').invalid && processValidation" [ngClass]="'error'"> Vendeur is required. </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Entrer le Telephone</td>
+            <td>
+              <input formControlName="telephone">
+              <label *ngIf="vendeurForm.get('telephone').invalid && processValidation" [ngClass]="'error'"> nom_vendeur is required. </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Entrer url de l'contact</td>
+            <td>
+              <input formControlName="contact">
+              <label *ngIf="vendeurForm.get('contact').invalid && processValidation" [ngClass]="'error'"> image is required. </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Entrer la adresse</td>
+            <td>
+              <input formControlName="adresse">
+              <label *ngIf="vendeurForm.get('adresse').invalid && processValidation" [ngClass]="'error'"> categorie is required. </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Entrer description</td>
+            <td>
+              <input formControlName="description">
+              <label *ngIf="vendeurForm.get('description').invalid && processValidation" [ngClass]="'error'"> code_unit is required. </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Entrer code_utilisateur</td>
+            <td>
+              <input formControlName="codeUtilisateur">
+              <label *ngIf="vendeurForm.get('codeUtilisateur').invalid && processValidation" [ngClass]="'error'"> prix_vendant is required. </label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button *ngIf="!vendeurIdToUpdate" class="btn-aside">CREATE</button>
+              <button *ngIf="vendeurIdToUpdate" class="btn-aside">UPDATE</button>
+              <button (click)="backToCreatevendeur()" *ngIf="vendeurIdToUpdate" class="btn-aside">Go Back</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <div id="fade" class="black_overlay"></div>
+    <br/>
+    <div *ngIf="statusCode; else processing">
+      <div *ngIf="statusCode === 201" [ngClass]="'success'">
+        vendeur added successfully.
+      </div>
+      <div *ngIf="statusCode === 409" [ngClass]="'success'">
+        vendeur already exists.
+      </div>
+      <div *ngIf="statusCode === 200" [ngClass]="'success'">
+        vendeur updated successfully.
+      </div>
+      <div *ngIf="statusCode === 204" [ngClass]="'success'">
+        vendeur deleted successfully.
+      </div>
+      <div *ngIf="statusCode === 500" [ngClass]="'error'">
+        Internal Server Error.
+      </div>
+    </div>
+    <ng-template #processing>
+      <img *ngIf="requestProcessing" src="assets/images/loading.gif">
+    </ng-template>
+  </div>
+  <div style="width:95%; text-align:center;margin:auto;">
+    <h3 class="titre-tableau">DÉTAILS SUR LES CLIENTS</h3>
+    <table>
+      <tr>
+        <th>vendeur</th>
+        <th>telephone</th>
+        <th>contact</th>
+        <th>adresse</th>
+        <th>description</th>
+        <th>code_utilisateur</th>
+      </tr>
+      <tr *ngFor="let vendeur of allVendeurs">
+        <td>{{vendeur.vendeur}}</td>
+        <td>{{vendeur.telephone}}</td>
+        <td>{{vendeur.contact}}</td>
+        <td>{{vendeur.adresse}}</td>
+        <td>{{vendeur.description}}</td>
+        <td>{{vendeur.codeUtilisateur}}</td>
+        <td colspan="2">
+          <button id="btn-modifier" type="button" (click)="loadVendeurToEdit(vendeur.id_vendeur)">modifier</button>
+          <button id="btn-effacer" type="button" (click)="deleteVendeur(vendeur.id_vendeur)">effacer</button>
+          <button id="btn-commander" (click)="choisirVendeur(vendeur.id_vendeur)"></button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>

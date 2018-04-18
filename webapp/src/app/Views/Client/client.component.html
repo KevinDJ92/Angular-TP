@@ -1,0 +1,170 @@
+<div class="bloc">
+  <header>
+    <div id="header_content">
+      <div id="header_top_content">
+        <div id="header_img_logo">
+          <a href="index.html"><img src="assets/images/logo2.png" alt="Logo de la compagnie"></a>
+        </div>
+        <div class="banner">
+          <img class="banner_img" src="assets/images/banniere.PNG" alt="Banniere de la compagnie">
+          <h1 class="banner_text">Liste des clients</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div id="conteneur-btn">
+    <ul class="menu-accordeon" id="accordeon">
+      <li id="lemenu">
+        <p style="color:#555;">MENU</p>
+        <ul>
+          <li><a [routerLink]="['/client']" class="btn-aside">CLIENT</a></li>
+          <li><a [routerLink]="['/produit']" class="btn-aside">PRODUIT</a></li>
+          <li><a href="#" class="btn-aside">COMMISSION</a></li>
+          <li><a href="#" class="btn-aside">SYSTÉME</a></li>
+        </ul>
+      </li>
+    </ul>
+    <p class="menu-accordeon">
+      <a class="ajouterProduit" (click)="ajouterClient()">
+            AJOUTER CLIENT
+      </a>
+    </p>
+    <p class="menu-accordeon">
+      <a class="ajouterProduit">
+          DECONNECTER
+        </a>
+    </p>
+  </div>
+
+  <!-- <h1>Angular 4 CRUD Example</h1> -->
+  <h3 *ngIf="clientIdToUpdate; else create">
+    Update client for Id: {{clientIdToUpdate}}
+  </h3>
+  <ng-template #create>
+  </ng-template>
+  <div>
+    <div id="light" class="white_content">
+
+      <!-- This is the lightbox content. -->
+      <a class="btn-aside" href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';
+       document.getElementById('fade').style.display='none'">FERMER</a>
+
+      <h1>Renseigner les champs ci-dessous:</h1>
+      <form [formGroup]="clientForm" (ngSubmit)="onClientFormSubmit()">
+        <table>
+          <tr>
+            <tr>
+              <td>Entrer Client</td>
+              <td>
+                <input formControlName="client">
+                <label *ngIf="clientForm.get('client').invalid && processValidation" [ngClass]="'error'"> Client is required. </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Entrer le Telephone</td>
+              <td>
+                <input formControlName="telephone">
+                <label *ngIf="clientForm.get('telephone').invalid && processValidation" [ngClass]="'error'"> nom_client is required. </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Entrer url de l'contact</td>
+              <td>
+                <input formControlName="contact">
+                <label *ngIf="clientForm.get('contact').invalid && processValidation" [ngClass]="'error'"> image is required. </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Entrer la adresse</td>
+              <td>
+                <input formControlName="adresse">
+                <label *ngIf="clientForm.get('adresse').invalid && processValidation" [ngClass]="'error'"> categorie is required. </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Entrer description</td>
+              <td>
+                <input formControlName="description">
+                <label *ngIf="clientForm.get('description').invalid && processValidation" [ngClass]="'error'"> code_unit is required. </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Entrer code_utilisateur</td>
+              <td>
+                <input formControlName="codeUtilisateur">
+                <label *ngIf="clientForm.get('codeUtilisateur').invalid && processValidation" [ngClass]="'error'"> prix_vendant is required. </label>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <button *ngIf="!clientIdToUpdate" class="btn-aside">CREATE</button>
+                <button *ngIf="clientIdToUpdate" class="btn-aside">UPDATE</button>
+                <button (click)="backToCreateclient()" *ngIf="clientIdToUpdate" class="btn-aside">Go Back</button>
+              </td>
+            </tr>
+        </table>
+      </form>
+    </div>
+    <div id="fade" class="black_overlay"></div>
+    <br/>
+
+    <div id="fa" class="black_overlay"></div>
+    <br/>
+    <!-- <div *ngIf="statusCode; else processing">
+      <div *ngIf="statusCode === 201" [ngClass]="'success'">
+        client added successfully.
+      </div>
+      <div *ngIf="statusCode === 409" [ngClass]="'success'">
+        client already exists.
+      </div>
+      <div *ngIf="statusCode === 200" [ngClass]="'success'">
+        client updated successfully.
+      </div>
+      <div *ngIf="statusCode === 204" [ngClass]="'success'">
+        client deleted successfully.
+      </div>
+      <div *ngIf="statusCode === 500" [ngClass]="'error'">
+        Internal Server Error.
+      </div>
+    </div> -->
+    <ng-template #processing>
+      <img *ngIf="requestProcessing" src="assets/images/loading.gif">
+    </ng-template>
+  </div>
+  <div style="width:95%; text-align:center;margin:auto;">
+    <h3 class="titre-tableau">DÉTAILS SUR LES CLIENTS</h3>
+    <div style="display: flex;background-color:rgba(97, 97, 97, 0.5); padding:10px;justify-content:space-around">
+      <div>
+        <label for="filtre" style="color: white;">Filtrer par nom:</label>
+        <input type="text" name="filtre" id="filtre" [(ngModel)]='listFilter' style="padding:10px" />
+      </div>
+      <div>
+        <button id="btn-imprimer" (click)="print()">IMPRIMER LA PAGE</button>
+      </div>
+    </div>
+    <div id="print-section">
+      <table>
+        <tr>
+          <th>client</th>
+          <th>telephone</th>
+          <th>contact</th>
+          <th>adresse</th>
+          <th>description</th>
+          <th>parametres</th>
+        </tr>
+        <tr *ngFor="let client of filteredClients">
+          <td>{{client.client}}</td>
+          <td>{{client.telephone}}</td>
+          <td>{{client.contact}}</td>
+          <td>{{client.adresse}}</td>
+          <td>{{client.description}}</td>
+          <td colspan="3">
+            <button id="btn-modifier" type="button" (click)="modifierClient(client.idClient)">modifier</button>
+            <button id="btn-effacer" type="button" (click)="deleteClient(client.idClient)">effacer</button>
+            <button id="btn-commander" style="color:#555" (click)="choisirClient(client.idClient)">choisir</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

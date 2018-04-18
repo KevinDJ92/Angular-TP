@@ -1,0 +1,263 @@
+<div class="bloc">
+  <header>
+    <div id="header_content">
+      <div id="header_top_content">
+        <div id="header_img_logo">
+          <a href="index.html"><img src="assets/images/logo2.png" alt="Logo de la compagnie"></a>
+        </div>
+        <div class="banner">
+          <img class="banner_img" src="assets/images/banniere.PNG" alt="Banniere de la compagnie">
+          <h1 class="banner_text">Liste des produits</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div id="conteneur-btn">
+    <ul class="menu-accordeon" id="accordeon">
+      <li id="lemenu">
+        <p style="color:#555;">MENU</p>
+        <ul>
+          <li><a [routerLink]="['/client']" class="btn-aside">CLIENT</a></li>
+          <li><a [routerLink]="['/produit']" class="btn-aside">PRODUIT</a></li>
+          <li><a [routerLink]="['/admin/vendeur']" class="btn-aside">VENDEUR</a></li>
+          <!-- <li><a href="#" class="btn-aside">COMMISSION</a></li>
+          <li><a href="#" class="btn-aside">SYSTÉME</a></li> -->
+        </ul>
+      </li>
+    </ul>
+    <p class="menu-accordeon">
+      <a class="ajouterProduit" (click)="ajouterProduit()">
+          AJOUTER PRODUIT
+    </a>
+    </p>
+    <p class="menu-accordeon">
+      <a class="ajouterProduit" href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
+        DECONNECTER
+      </a>
+    </p>
+  </div>
+  <!-- HTML du panier -->
+  <div id="box" class="white_content">
+    <div> <a class="btn-aside" href="javascript:void(0)" onclick="document.getElementById('box').style.display='none';document.getElementById('fad').style.display='none'">FERMER</a></div>
+    <div id="conteneur-cmd">
+      <!-- C'EST CETTE DIV DE ID="cmd" QUI REPRESENTE CHAQUE PRODUIT...DONC IL FAUDRA METTRE UNE BOUCLE FOR POUR 
+       AFFICHER LE NOMBRE DE PRODUITS COMMANDÉS -->
+       <div *ngFor="let produit of panierProduit">  
+        <div class="cmd">
+          <div class="bandeau">
+            <form [formGroup]="produitForm" (ngSubmit)="onCommandFormSubmit()">
+                <h2>nom: {{produit.nomProduit}}</h2><br>
+                <span>image: {{produit.image}}</span><br>
+                <span>upc:  {{produit.upc}}</span><br>
+                <span>quantiter: {{produit.quantite}}</span>
+            </form>
+          </div>
+          <div class="piedpage">
+            <button id="btn-va" class="btn-panier" type="button">enlever du panier</button>
+            <button id="btn-eff" class="btn-panier" type="button">modifier la quantité</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="conteneur-btn-cmd">
+      <button class="button" id="button-A">annuler la commande</button>
+      <button class="button" id="button-V">valider la commande</button>
+    </div>
+  </div>
+  <div id="fad" class="black_overlay"></div>
+  <br/>
+  <!-- fin html du panier -->
+
+  <!-- <h1>Angular 4 CRUD Example</h1> -->
+  <h3 *ngIf="produitIdToUpdate; else create">
+    Update produit for Id: {{produitIdToUpdate}}
+  </h3>
+  <ng-template #create>
+    <!-- <h3> Create New produit </h3> -->
+  </ng-template>
+  <div>
+    <div id="light" class="white_content">
+
+      <!-- This is the lightbox content. -->
+      <a class="btn-aside" href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">FERMER</a>
+
+      <h1>Renseigner les champs ci-dessous:</h1>
+      <form [formGroup]="produitForm" (ngSubmit)="onProduitFormSubmit()">
+        <table>
+          <tr>
+            <td>Entrer l'UPC</td>
+            <td>
+              <input formControlName="upc">
+              <label *ngIf="produitForm.get('upc').invalid && processValidation" [ngClass]="'error'"> UPC is required. </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Entrer Nom du Produit</td>
+            <td>
+              <input formControlName="nomProduit">
+              <label *ngIf="produitForm.get('nomProduit').invalid && processValidation" [ngClass]="'error'"> nom_produit is required. </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Entrer url de l'Image</td>
+            <td>
+              <input formControlName="image">
+              <label *ngIf="produitForm.get('image').invalid && processValidation" [ngClass]="'error'"> image is required. </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Entrer la Categorie</td>
+            <td>
+              <input formControlName="categorie">
+              <label *ngIf="produitForm.get('categorie').invalid && processValidation" [ngClass]="'error'"> categorie is required. </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Entrer Code Unit</td>
+            <td>
+              <input formControlName="codeUnit">
+              <label *ngIf="produitForm.get('codeUnit').invalid && processValidation" [ngClass]="'error'"> code_unit is required. </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Entrer Prix Vendant</td>
+            <td>
+              <input formControlName="prixVendant">
+              <label *ngIf="produitForm.get('prixVendant').invalid && processValidation" [ngClass]="'error'"> prix_vendant is required. </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Entrer Prix d'Achat</td>
+            <td>
+              <input formControlName="prixAchat">
+              <label *ngIf="produitForm.get('prixAchat').invalid && processValidation" [ngClass]="'error'"> prix_achat is required. </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Entrer la Quantite</td>
+            <td>
+              <input formControlName="quantite">
+              <label *ngIf="produitForm.get('quantite').invalid && processValidation" [ngClass]="'error'"> quantite is required. </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Entrer la Description</td>
+            <td>
+              <input formControlName="description">
+              <label *ngIf="produitForm.get('description').invalid && processValidation" [ngClass]="'error'"> description is required. </label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button *ngIf="!produitIdToUpdate" class="btn-aside">CREATE</button>
+              <button *ngIf="produitIdToUpdate" class="btn-aside">UPDATE</button>
+              <button (click)="backToCreateproduit()" *ngIf="produitIdToUpdate" class="btn-aside">Go Back</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <div id="fade" class="black_overlay"></div>
+    <br/>
+
+    <div id="li" class="white_content">
+
+      <!-- This is the lightbox content. -->
+      <a class="btn-aside" href="javascript:void(0)" onclick="document.getElementById('li').style.display='none';document.getElementById('fa').style.display='none'">
+        FERMER</a>
+
+      <h1>Renseigner le champ ci-dessous:</h1>
+      <form [formGroup]="panierForm">
+        <table>
+          <tr>
+            <td>Entrer la quantite</td>
+            <td>
+              <input type="number" formControlName="quantite">
+              <label *ngIf="panierForm.get('quantite').invalid && processValidation" [ngClass]="'error'"> la quantite est nécessaire</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <button (click)="ajouterProduitAuPanier()">VALIDER</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+
+    <div id="fa" class="black_overlay"></div>
+    <br/>
+
+    <div *ngIf="statusCode; else processing">
+      <div *ngIf="statusCode === 201" [ngClass]="'success'">
+        produit added successfully.
+      </div>
+      <div *ngIf="statusCode === 409" [ngClass]="'success'">
+        produit already exists.
+      </div>
+      <div *ngIf="statusCode === 200" [ngClass]="'success'">
+        produit updated successfully.
+      </div>
+      <div *ngIf="statusCode === 204" [ngClass]="'success'">
+        produit deleted successfully.
+      </div>
+      <div *ngIf="statusCode === 500" [ngClass]="'error'">
+        Internal Server Error.
+      </div>
+    </div>
+    <ng-template #processing>
+      <img *ngIf="requestProcessing" src="assets/images/loading.gif">
+    </ng-template>
+  </div>
+  <div style="width:95%; text-align:center; margin:auto;">
+    <h3 class="titre-tableau">DÉTAILS SUR LES PRODUITS</h3>
+    <div style="display: flex;background-color:rgba(97, 97, 97, 0.5); padding:10px;justify-content:space-around">
+      <div>
+        <label for="filtre" style="color: white;">Filtrer par nom:</label>
+        <input type="text" name="filtre" id="filtre" [(ngModel)]='listFilter' style="padding:10px" />
+      </div>
+      <div>
+        <!-- Pour ouvrir le panier -->
+        <a id="btn-panier" style="color:#555;" href="javascript:void(0)" (click)="searchProduit()">
+                        CONSULTER PANIER
+          </a>
+        <button id="btn-imprimer" (click)="print()">IMPRIMER LA PAGE</button>
+      </div>
+    </div>
+    <div id="print-section">
+      <table>
+        <tr>
+          <th>upc</th>
+          <th>nom</th>
+          <th>image</th>
+          <th>categorie</th>
+          <th>unite</th>
+          <th>prix_vendant</th>
+          <th>prix_achat</th>
+          <th>quantite</th>
+          <th>description</th>
+          <th>parametres</th>
+        </tr>
+        <tr *ngFor="let produit of filteredProduits">
+          <td>{{produit.upc}}</td>
+          <td>{{produit.nomProduit}}</td>
+          <td>{{produit.image}}</td>
+          <td>{{produit.categorie}}</td>
+          <td>{{produit.codeUnit}}</td>
+          <td>{{produit.prixVendant}}</td>
+          <td>{{produit.prixAchat}}</td>
+          <td>{{produit.quantite}}</td>
+          <td>{{produit.description}}</td>
+          <td colspan="3">
+            <button id="btn-modifier" type="button" (click)="modifierProduit(produit.idProduit)">modifier</button>
+            <button id="btn-effacer" type="button" (click)="deleteProduit(produit.idProduit)">effacer</button>
+            <button id="btn-commander">
+          <a style="color:#555;"  href="javascript:void(0)" (click)="allerProduitAuPanier(produit.idProduit)">
+            choisir
+          </a>
+      </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>

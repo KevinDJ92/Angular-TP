@@ -1,0 +1,7 @@
+.bloc {
+    width:95%;
+    margin:auto;
+    background: white;
+    background-image: linear-gradient(to bottom, white 11%, white 56%);
+    box-shadow: 0 0 65px white inset, 0 0 30px #303030 inset;
+}
