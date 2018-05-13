@@ -1,3 +1,11 @@
+*{
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+	font-family:'playfair_display_scregular', verdana, sans-serif;
+}
+
+article, aside, details, figcaption, figure, footer, header, main, nav, section { display: block; }
+
 .bloc {
         width:95%;
         margin:auto;
@@ -35,9 +43,7 @@
     text-align: center;
 }
 
-
 .titre-tableau{ 
-   
     margin:auto;
     text-align: center;
     padding: 20px;
@@ -47,41 +53,7 @@
     padding:10px;
     font-size: 1em;
     font-weight: bolder;
-   
 }
-
-
-
-/*Fonts*/
-
-/* @font-face {
-    font-family: 'ceviche_oneregular';
-    src: url('fonts/cevicheone-regular-webfont.eot');
-    src: url('fonts/cevicheone-regular-webfont.eot?#iefix') format('embedded-opentype'),
-	url('fonts/cevicheone-regular-webfont.woff2') format('woff2'),
-	url('fonts/cevicheone-regular-webfont.woff') format('woff'),
-	url('fonts/cevicheone-regular-webfont.ttf') format('truetype'),
-	url('fonts/cevicheone-regular-webfont.svg#ceviche_oneregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-	
-} */
-
-
-
-/* @font-face {
-    font-family: 'playfair_display_scregular';
-    src: url('fonts/playfairdisplaysc-regular-webfont.eot');
-    src: url('fonts/playfairdisplaysc-regular-webfont.eot?#iefix') format('embedded-opentype'),
-	url('fonts/playfairdisplaysc-regular-webfont.woff2') format('woff2'),
-	url('fonts/playfairdisplaysc-regular-webfont.woff') format('woff'),
-	url('fonts/playfairdisplaysc-regular-webfont.ttf') format('truetype'),
-	url('fonts/playfairdisplaysc-regular-webfont.svg#playfair_display_scregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-	
-} */
-/*les boutons fixes a mettre partout*/
 
 .btn-aside{
     background-color:#1280B3;
@@ -96,35 +68,16 @@
 }
 /*fin des boutons a mettre partout*/
 
-
-
-
 /*Fin des fonts*/
 
-*{
-	-webkit-box-sizing:border-box;
-	box-sizing:border-box;
-	font-family:'playfair_display_scregular', verdana, sans-serif;
-}
-
-
-
-article, aside, details, figcaption, figure, footer, header, main, nav, section { display: block; }
-
-
-
-
 /*STYLE GÉNÉRAL*/
-
 a{
-	
 	text-decoration:none;
 }
 /*header*/
 header,footer{
 	background-color:#1280B3;
 	color: #fff;
-	
 }
 
 #header_top_content{
@@ -146,7 +99,6 @@ header,footer{
 	text-align:left;
 	padding: 20px;
 }
-
 
 /*banniere*/
 .banner{
@@ -176,7 +128,6 @@ header,footer{
 	box-shadow: 0 1px 3px black;
 	padding: 10px;
 }
-
 
 /*Footer*/
 #footer_copyright {
@@ -213,14 +164,11 @@ header,footer{
 	text-align:center;
 }
 
-  
- 
 /*Menu fixe*/
 .menu-accordeon {
 
      list-style:none;
      text-align: center;
-    /* width: 80%;*/
    }
    .menu-accordeon ul {
    /*  padding:0;
@@ -228,8 +176,6 @@ header,footer{
      list-style:none;
      text-align: center;
    }
- 
-  
    .menu-accordeon li li {
       max-height:0;
       overflow: hidden;
@@ -245,19 +191,13 @@ header,footer{
      text-decoration: none;
      
      padding:10px;
-    
    }
-  /* .menu-accordeon ul li a, .menu-accordeon li:hover li a {
-     font-size:1em
-   }*/
+
    .menu-accordeon li:hover {
-   /*   background: #1280B3;*/
       border-radius:  0 ;
 
    }
-   /*#menu-accordeon li li:hover {
-      background: #999;
-   }*/
+
    .menu-accordeon ul li:last-child  {
     
       border:none;
@@ -292,24 +232,24 @@ header,footer{
 
    #btn-modifier,#btn-imprimer,#btn-effacer,.ajouterProduit, #btn-commander,#btn-panier,#button-A,#button-V{
     border:none;
-	padding:10px 8px 10px 8px;
-	border-radius:75%;
-	border-bottom:7px solid #008CBA;
-	
-	color:#555;
-	background:#fff;
-	box-shadow:2px 2px 3px #999;
-	border-top:2px solid #59cd27;
+    padding:10px 8px 10px 8px;
+    border-radius:75%;
+    border-bottom:7px solid #008CBA;
+
+    color:#555;
+    background:#fff;
+    box-shadow:2px 2px 3px #999;
+    border-top:2px solid #59cd27;
    }
 
    #accordeon{
     border:none;
     text-align: center;    
     background:#fff;
-	box-shadow:2px 2px 3px #999;
+	  box-shadow:2px 2px 3px #999;
     border-top:2px solid #59cd27;
     border-radius:75%;
-	border-bottom:7px solid #008CBA;
+	  border-bottom:7px solid #008CBA;
    }
    
    #accordeon:hover{
@@ -328,10 +268,8 @@ header,footer{
     background:#E7D918;
    }
 
-
    /***ligthbox quantite a commander*/
-   .overlay
-   {
+   .overlay{
        width: 100%;
        height: 100%;
        position: absolute; 
@@ -341,18 +279,16 @@ header,footer{
        z-index: 999;
        background: rgba(0,0,0,0.7);
    }
-       .overlay a
-       {
-           display: table-cell; 
-           vertical-align: middle; 
-           text-align: center;
-       }
-           .overlay_container h1
-           {
-               background: #ffffff;
-               padding: 10px;
-           
-           }
+
+  .overlay a{
+      display: table-cell; 
+       vertical-align: middle; 
+       text-align: center;
+   }
+    .overlay_container h1{
+         background: #ffffff;
+         padding: 10px;
+    }
     
    .overlay:target { display: table; }
 
@@ -368,59 +304,49 @@ header,footer{
       justify-content:space-around
    }
 
-     /***Style du PANIER***/
-   
-     #conteneur-cmd{
-        
-       text-align:center;
-           
-           padding-bottom:20px;
-           
-           
-     }
- .cmd{
- display:inline-block;
- margin-bottom:10px;
- margin-top:10px;
- background-color:#008CBA;
+ /***Style du PANIER***/
+ #conteneur-cmd{
+   text-align:center;
+    padding-bottom:20px;
  }
- div.bandeau {
- width:300px;
 
- text-align:center;
- color:white;
- background-color:#008CBA;
+ .cmd{
+   display:inline-block;
+   margin-bottom:10px;
+   margin-top:10px;
+   background-color:#008CBA;
  }
+
+ div.bandeau {
+    width:300px;
+   text-align:center;
+   color:white;
+   background-color:#008CBA;
+ 
  div.contenu {
- width:300px;
- color:white;
- text-align:center;
- 
- 
- 
+   width:300px;
+   color:white;
+   text-align:center;
  }
+   
  div.piedpage {
- width:300px;
- 
- padding-top:10px;
- padding-bottom:10px;
- text-align:center;
- 
- background-color:#008CBA;
+   width:300px;
+   padding-top:10px;
+   padding-bottom:10px;
+   text-align:center;
+   background-color:#008CBA;
  }
+   
  .contenu span{
- display:block;
+    display:block;
  }
- 
- 
+   
  #conteneur-btn-cmd{
- 
- text-align:center;
+    text-align:center;
  }
+   
  #btn-eff, #btn-va{
- 
      background-color:#1280B3;
-     
      color:white;
      padding:10px;
      margin-top: 20px;
@@ -429,9 +355,11 @@ header,footer{
      font-weight: bolder;
      box-shadow: 10px -10px 5px #CECACA inset;
  }
+   
  #button-A:hover{
- background:#CD2727;
+    background:#CD2727;
  }
+   
  #button-V:hover{
- background:#59cd27;
+    background:#59cd27;
  }
